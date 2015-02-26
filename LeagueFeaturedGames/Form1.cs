@@ -133,10 +133,8 @@ namespace LeagueFeaturedGames
 
             TimeSpan diff = DateTime.UtcNow - startTime;
 
-            if( selectedRegion.Equals(Constants.kr) || selectedRegion.Equals(Constants.na) )
-            {
-                diff = diff.Subtract( new TimeSpan(0,3,0) );
-            }
+            diff = diff.Subtract( new TimeSpan(0,3,0) );
+            
 
             timeLabel.Text = diff.ToString(@"mm\:ss");
 
