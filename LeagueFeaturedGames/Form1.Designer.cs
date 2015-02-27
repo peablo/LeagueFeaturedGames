@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.summ1team1 = new System.Windows.Forms.TextBox();
@@ -71,6 +72,7 @@
             this.prevGameButton = new System.Windows.Forms.Button();
             this.nextGameButton = new System.Windows.Forms.Button();
             this.refreshGamesButton = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.champ1team1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.champ1team2)).BeginInit();
@@ -549,12 +551,12 @@
             // timeLabel
             // 
             this.timeLabel.AutoSize = true;
-            this.timeLabel.Location = new System.Drawing.Point(763, 383);
+            this.timeLabel.Location = new System.Drawing.Point(787, 384);
             this.timeLabel.Name = "timeLabel";
             this.timeLabel.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.timeLabel.Size = new System.Drawing.Size(28, 13);
+            this.timeLabel.Size = new System.Drawing.Size(34, 13);
             this.timeLabel.TabIndex = 17;
-            this.timeLabel.Text = "0:00";
+            this.timeLabel.Text = "00:00";
             // 
             // prevGameButton
             // 
@@ -586,6 +588,12 @@
             this.refreshGamesButton.Text = "Refresh featured games";
             this.refreshGamesButton.UseVisualStyleBackColor = true;
             this.refreshGamesButton.Click += new System.EventHandler(this.refreshGamesButton_Click);
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // Form1
             // 
@@ -678,6 +686,7 @@
         private System.Windows.Forms.TextBox summ5team2;
         private System.Windows.Forms.Label labelError;
         private System.Windows.Forms.Button refreshGamesButton;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

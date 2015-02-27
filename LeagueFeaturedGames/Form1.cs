@@ -19,10 +19,14 @@ namespace LeagueFeaturedGames
         private Champion[] championList;
         private string clientPath;
 
+        private static readonly int clientRefreshInterval = 300;
+        private TimeSpan refreshTimeRemaining = new TimeSpan(0, 0, clientRefreshInterval);
+
         private string selectedRegion = Constants.euw; // Europe west by default
         private FeaturedGames selectedFeaturedGames;
         private int selectedGameIndex = 0;
         private CurrentGameInfo selectedGame;
+        private TimeSpan currentGameTimeSpan;
 
         private Dictionary<string, FeaturedGames> featuredGamesByRegion = new Dictionary<string,FeaturedGames>();
 
@@ -133,11 +137,15 @@ namespace LeagueFeaturedGames
 
             TimeSpan diff = DateTime.UtcNow - startTime;
 
-            diff = diff.Subtract( new TimeSpan(0,3,0) );
-            
+            currentGameTimeSpan = diff;
 
-            timeLabel.Text = diff.ToString(@"mm\:ss");
+            updateTimeLabel();
 
+        }
+
+        private void updateTimeLabel() 
+        {
+            timeLabel.Text = currentGameTimeSpan.ToString(@"mm\:ss");
         }
 
         
@@ -288,9 +296,32 @@ namespace LeagueFeaturedGames
             }
         }
 
+        private void updateRefreshLock()
+        {
+
+            if( refreshTimeRemaining.TotalSeconds <= 0 )
+            {
+                refreshGamesButton.Enabled = true;
+                refreshGamesButton.Text = "Refresh featured games";
+            }
+            else
+            {
+                refreshGamesButton.Enabled = false;
+                refreshGamesButton.Text = "Refresh featured games (" + refreshTimeRemaining.TotalSeconds+" s)";
+            }
+
+        }
+
+        private void renewRefreshTime ()
+        {
+            refreshTimeRemaining = new TimeSpan(0, 0, clientRefreshInterval);
+            updateRefreshLock();
+        }
+
 
         private void refreshGamesButton_Click(object sender, EventArgs e)
         {
+            renewRefreshTime();
 
             featuredGamesByRegion = new Dictionary<string, FeaturedGames>();
 
@@ -298,6 +329,17 @@ namespace LeagueFeaturedGames
             selectedFeaturedGames = null;
 
             showFeaturedGames(selectedRegion);
+
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+
+            currentGameTimeSpan = currentGameTimeSpan.Add(new TimeSpan(0, 0, 1));
+            updateTimeLabel();
+
+            refreshTimeRemaining = refreshTimeRemaining.Subtract(new TimeSpan(0, 0, 1));
+            updateRefreshLock();
 
         }
 
@@ -351,6 +393,8 @@ namespace LeagueFeaturedGames
         {
             showFeaturedGames(Constants.tr);
         }
+
+        
 
         
 
