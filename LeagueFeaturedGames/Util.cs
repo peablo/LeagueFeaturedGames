@@ -157,6 +157,31 @@ namespace LeagueFeaturedGames
 
         }
 
+        public static string getSpectatorString(CurrentGameInfo game, string region)
+        {
+            string clientPath = "\""
+                + getClientPath()
+                + "\\"
+                + Constants.leagueClientFile
+                + "\"";
+
+            string parameters = Constants.spectatorConstantParameters
+                + " "
+                + "\"spectator "
+                + getSpectatorUrlByRegion(region)
+                + " "
+                + game.observers.encryptionKey
+                + " "
+                + game.gameId
+                + " "
+                + getPlatformIDByRegion(region)
+                + "\"";
+
+            string command = clientPath + " " + parameters;
+
+            return command;
+        }
+
         public static DateTime fromUnixTime(long unixTime)
         {
             var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);

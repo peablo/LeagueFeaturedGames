@@ -73,6 +73,7 @@
             this.nextGameButton = new System.Windows.Forms.Button();
             this.refreshGamesButton = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.commandLine = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.champ1team1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.champ1team2)).BeginInit();
@@ -595,11 +596,22 @@
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // commandLine
+            // 
+            this.commandLine.AutoSize = true;
+            this.commandLine.Location = new System.Drawing.Point(542, 382);
+            this.commandLine.Name = "commandLine";
+            this.commandLine.Size = new System.Drawing.Size(176, 17);
+            this.commandLine.TabIndex = 23;
+            this.commandLine.Text = "Copy command line to clipboard";
+            this.commandLine.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(855, 415);
+            this.Controls.Add(this.commandLine);
             this.Controls.Add(this.refreshGamesButton);
             this.Controls.Add(this.nextGameButton);
             this.Controls.Add(this.prevGameButton);
@@ -687,6 +699,7 @@
         private System.Windows.Forms.Label labelError;
         private System.Windows.Forms.Button refreshGamesButton;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.CheckBox commandLine;
     }
 }
 

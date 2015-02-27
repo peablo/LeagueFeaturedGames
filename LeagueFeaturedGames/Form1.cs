@@ -286,6 +286,15 @@ namespace LeagueFeaturedGames
 
         private void watchButton_Click(object sender, EventArgs e)
         {
+            if(commandLine.Checked)
+            {
+                Clipboard.SetText( Util.getSpectatorString(selectedGame, selectedRegion) );
+                MessageBox.Show("The command line string has been copied to the clipboard.");
+
+                return;
+            }
+
+            
             if (Util.runSpectate(selectedGame,selectedRegion))
             {
                 this.WindowState = FormWindowState.Minimized;
